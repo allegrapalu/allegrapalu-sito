@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Allegra Palù</title>
+<meta name="description" content="Scrittura, riflessioni e note di campo sulla comunicazione culturale.">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.blog-hero{
+  padding:9rem 4rem 4rem;
+  border-bottom:1px solid var(--border);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:end;
+}
+.blog-hero-left{}
+.blog-hero-right{
+  font-size:1rem;line-height:1.8;color:var(--muted);
+  font-weight:300;
+  padding-bottom:0.3rem;
+}
+
+/* FILTRI */
+.blog-filtri{
+  padding:1.5rem 4rem;
+  display:flex;gap:1rem;align-items:center;
+  border-bottom:1px solid var(--border);
+  background:var(--bianco);
+  position:sticky;top:3.5rem;z-index:100;
+}
+.filtro-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);flex-shrink:0;}
+.filtri-list{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.filtro{
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.3rem 0.9rem;border:1px solid var(--border);
+  color:var(--muted);background:transparent;cursor:pointer;
+  transition:all 0.2s;
+}
+.filtro:hover,.filtro.active{border-color:var(--nero);color:var(--nero);}
+
+/* GRIGLIA ARTICOLI */
+.blog-grid{
+  padding:4rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-bottom:1px solid var(--border);
+}
+.art-card{
+  padding:2.5rem;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  transition:background 0.2s;
+  display:flex;flex-direction:column;
+  gap:0.8rem;
+}
+.art-card:hover{background:var(--rosa-pallido);}
+.art-card:nth-child(3n){border-right:none;}
+
+/* ARTICOLO FEATURED — primo, a tutta larghezza */
+.art-card.featured{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+  border-right:none;
+}
+.art-card.featured .art-corpo{display:flex;flex-direction:column;gap:0.8rem;}
+.art-img{
+  background:var(--rosa-chiaro);
+  aspect-ratio:16/9;
+  position:relative;overflow:hidden;
+}
+.art-img-placeholder{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:var(--rosa);opacity:0.2;
+}
+/* Sostituisci con: <img src="../foto/nome-foto.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"> */
+.art-img-label{
+  position:absolute;bottom:0.8rem;left:0.8rem;
+  font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);
+}
+.art-img.small{aspect-ratio:3/2;}
+
+.art-cat{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rosa);}
+.art-title{font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.3;color:var(--nero);}
+.art-card.featured .art-title{font-size:1.8rem;}
+.art-excerpt{font-size:0.82rem;line-height:1.7;color:var(--muted);}
+.art-meta{font-size:0.68rem;color:var(--muted);letter-spacing:0.05em;}
+.art-link{
+  font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;color:var(--nero);margin-top:auto;
+}
+.art-link:hover{color:var(--rosa);}
+
+/* CTA NEWSLETTER */
+.blog-newsletter{
+  padding:5rem 4rem;
+  background:var(--rosa-pallido);
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+}
+.nl-h{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:400;line-height:1.1;}
+.nl-h em{font-style:italic;}
+.nl-body{font-size:0.9rem;line-height:1.8;color:var(--muted);margin-bottom:2rem;}
+.nl-form{display:flex;gap:0;}
+.nl-input{
+  flex:1;padding:0.85rem 1rem;
+  border:1px solid var(--border);border-right:none;
+  font-family:'DM Sans',sans-serif;font-size:0.85rem;
+  background:var(--bianco);color:var(--nero);
+  outline:none;
+}
+.nl-input:focus{border-color:var(--rosa);}
+.nl-btn{
+  padding:0.85rem 1.5rem;
+  background:var(--nero);color:var(--bianco);
+  border:none;font-family:'DM Sans',sans-serif;
+  font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;
+}
+.nl-btn:hover{background:var(--rosa);}
+.nl-note{font-size:0.7rem;color:var(--muted);margin-top:0.8rem;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Allegra Palù</a>
+  <div class="nav-links">
+    <a href="../index.html#chi">Chi sono</a>
+    <a href="../index.html#servizi">Servizi</a>
+    <a href="../index.html#pacchetti">Pacchetti</a>
+    <a href="index.html" class="active">Blog</a>
+    <a href="../index.html#contatti">Contatti</a>
+  </div>
+</nav>
+
+<!-- HERO BLOG -->
+<div class="blog-hero">
+  <div class="blog-hero-left">
+    <span class="s-tag">Scrittura & riflessioni</span>
+    <h1 class="s-h2" style="font-size:3.5rem">Note di<br><em>campo</em></h1>
+  </div>
+  <div class="blog-hero-right">
+    Testi di lavoro, riflessioni sul fare comunicazione culturale, storie dal backstage dei festival. Blog e portfolio si mescolano — perché per me sono la stessa cosa.
+  </div>
+</div>
+
+<!-- FILTRI -->
+<div class="blog-filtri">
+  <span class="filtro-label">Filtra</span>
+  <div class="filtri-list">
+    <button class="filtro active" onclick="filtra(this,'tutti')">Tutti</button>
+    <button class="filtro" onclick="filtra(this,'storytelling')">Storytelling</button>
+    <button class="filtro" onclick="filtra(this,'copywriting')">Copywriting</button>
+    <button class="filtro" onclick="filtra(this,'festival')">Festival</button>
+    <button class="filtro" onclick="filtra(this,'riflessioni')">Riflessioni</button>
+  </div>
+</div>
+
+<!-- GRIGLIA -->
+<div class="blog-grid" id="blog-grid">
+
+  <!-- FEATURED -->
+  <article class="art-card featured" data-cat="storytelling festival">
+    <div class="art-img">
+      <div class="art-img-placeholder"></div>
+      <!-- <img src="../foto/traviata.jpg" alt="Una Traviata da cortile"> -->
+      <span class="art-img-label">↑ foto</span>
+    </div>
+    <div class="art-corpo">
+      <span class="art-cat">Storytelling festival</span>
+      <div class="art-title">Una Traviata da cortile — Mittelfest 2026</div>
+      <p class="art-excerpt">Come si annuncia un'opera che vuole uscire dal teatro e tornare nella piazza. Il caso Baricco e la comunicazione dell'evento attorno all'evento.</p>
+      <span class="art-meta">Giugno 2026</span>
+      <a href="mittelfest-traviata.html" class="art-link">Leggi →</a>
+    </div>
+  </article>
+
+  <!-- ARTICOLO 2 -->
+  <article class="art-card" data-cat="riflessioni">
+    <span class="art-cat">Riflessioni</span>
+    <div class="art-title">Il laterale come metodo</div>
+    <p class="art-excerpt">Sul rendere visibile il lavoro che non si vede. Come il punto di vista obliquo diventa strumento professionale.</p>
+    <span class="art-meta">Maggio 2026</span>
+    <a href="il-laterale.html" class="art-link">Leggi →</a>
+  </article>
+
+  <!-- ARTICOLO 3 -->
+  <article class="art-card" data-cat="festival">
+    <span class="art-cat">Curatela</span>
+    <div class="art-title">Diversimili — come si comunica la scienza a chi non si sente pubblico scientifico</div>
+    <p class="art-excerpt">Il festival Kaleidoscienza e la sfida di costruire un linguaggio che stia tra la meraviglia e il rigore.</p>
+    <span class="art-meta">Aprile 2026</span>
+    <a href="diversimili.html" class="art-link">Leggi →</a>
+  </article>
+
+  <!-- ARTICOLO 4 -->
+  <article class="art-card" data-cat="copywriting">
+    <span class="art-cat">Copywriting</span>
+    <div class="art-title">Perché i testi del tuo sito non convertono (anche se sono belli)</div>
+    <p class="art-excerpt">La differenza tra scrivere bene e scrivere per qualcuno. Un errore che vedo ripetere spesso nei siti culturali.</p>
+    <span class="art-meta">Marzo 2026</span>
+    <a href="#" class="art-link">Leggi →</a>
+  </article>
+
+  <!-- ARTICOLO 5 -->
+  <article class="art-card" data-cat="storytelling">
+    <span class="art-cat">Storytelling</span>
+    <div class="art-title">Cuocolo/Bosetti — cinquant'anni di teatro che entra nelle case</div>
+    <p class="art-excerpt">IRAA Theatre e la costruzione di un'identità narrativa per il tour nazionale 2027.</p>
+    <span class="art-meta">Febbraio 2026</span>
+    <a href="cuocolo-bosetti.html" class="art-link">Leggi →</a>
+  </article>
+
+  <!-- ARTICOLO 6 — PLACEHOLDER per prossimo -->
+  <article class="art-card" data-cat="" style="background:var(--grigio,#f0ece8);border-color:transparent;">
+    <span class="art-cat" style="opacity:0.4">Prossimamente</span>
+    <div class="art-title" style="color:var(--muted);font-style:italic;font-size:1.1rem">Il prossimo pezzo<br>è in lavorazione</div>
+    <p class="art-excerpt" style="opacity:0.5">Iscriviti alla newsletter per riceverlo quando esce.</p>
+    <a href="../index.html#contatti" class="art-link">→ Iscriviti</a>
+  </article>
+
+</div>
+
+<!-- NEWSLETTER -->
+<div class="blog-newsletter">
+  <div>
+    <h2 class="nl-h">La newsletter<br><em>narrativa</em></h2>
+  </div>
+  <div>
+    <p class="nl-body">Non una newsletter di aggiornamenti. Una newsletter di riflessioni — lenta, approfondita, non troppo frequente. Arriva quando ho qualcosa da dire.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="la tua email">
+      <button class="nl-btn">Iscriviti</button>
+    </div>
+    <p class="nl-note">Niente spam. Niente algoritmi. Solo parole.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="../index.html" class="f-logo">Allegra Palù</a>
+  <div class="f-clienti">
+    <span>Mittelfest</span>
+    <span>Cuocolo/Bosetti</span>
+    <span>Kaleidoscienza</span>
+  </div>
+  <div class="f-info">P.IVA · Friuli Venezia Giulia</div>
+</footer>
+
+<script>
+function filtra(btn, cat) {
+  document.querySelectorAll('.filtro').forEach(f => f.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.art-card:not(.featured)').forEach(card => {
+    if(cat === 'tutti') {
+      card.style.display = 'flex';
+    } else {
+      const cardCat = card.dataset.cat || '';
+      card.style.display = cardCat.includes(cat) ? 'flex' : 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
